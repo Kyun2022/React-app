@@ -1,22 +1,17 @@
-import { useState, memo } from 'react';
-import { Child1 } from './components/CHild1';
-import { Child4 } from './components/CHild4';
+import { useContext } from 'react';
 
-export const App = memo(() => {
-  console.log('Appレンダリング');
+import { AdminFlagContext } from './components/providers/AdminFlagProvider';
+import { Card } from './components/Card';
 
-  const [num, setNum] = useState(0);
-
-  const onClickButton = () => {
-    setNum(num + 1);
-  };
+export const App = () => {
+  const { isAdmin, setIsAdmin } = useContext(AdminFlagContext);
+  const onClickSwitch = () => setIsAdmin(!isAdmin);
 
   return (
-    <>
-      <button onClick={onClickButton}>ボタン</button>
-      <p>{num}</p>
-      <Child1 />
-      <Child4 />
-    </>
+    <div>
+      {isAdmin ? <span>管理者です</span> : <span>管理者以外です</span>}
+      <button onClick={onClickSwitch}>切り替え</button>
+      <Card isAdmin={isAdmin} />
+    </div>
   );
-});
+};

@@ -1,6 +1,13 @@
-import { App } from './App';
 import { createRoot } from 'react-dom/client';
 
-const container = document.getElementById('root');
-const root = createRoot(container);
-root.render(<App />);
+import { App } from './App';
+import { AdminFlagProvider } from './components/providers/AdminFlagProvider';
+
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement);
+
+root.render(
+  <AdminFlagProvider >
+    <App />
+  </AdminFlagProvider>
+);
